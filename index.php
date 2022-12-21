@@ -5,8 +5,8 @@
     // Only change code below this line
 
     // Instruction: require all the files you need here. Tips: (includes/functions.php, includes/class-subscribe-form.php)
-    require './includes/class-subscribe-form.php';
     require './includes/functions.php';
+    require './includes/class-subscribe-form.php';
 
     // Only change code above this line
 
@@ -19,9 +19,8 @@
     // Only change code below this line
 
     // Instruction: trigger the subscribe function in $subscribeForm, and store the result into $result variable
-    $auth = new SubscribeForm();
-    $error = $auth->subscribe(
-        $email
+    $message = $subscribeForm->subscribe(
+      $email
     );
 
     // Only change code above this line
@@ -56,9 +55,14 @@
                 <!-- Only change code below this line -->
 
                 <!-- Instruction: Put error message or success message here -->
-                <?php if(isset($error)): ?>
+                <?php if(isset($message["status"]) && $message["status"]=='success'): ?>
                     <div class="alert alert-info" role="alert">
-                        <?php echo $error ?>
+                        <?php echo $message['message'] ?>
+                    </div>
+                <?php endif; ?>
+                <?php if(isset($message["status"]) && $message["status"]=='error'): ?>
+                    <div class="alert alert-danger" role="alert">
+                        <?php echo $message['message'] ?>
                     </div>
                 <?php endif; ?>
                 <!-- Only change code above this line -->
